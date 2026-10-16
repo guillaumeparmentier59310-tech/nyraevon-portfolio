@@ -2,7 +2,7 @@
   const elements = [...document.querySelectorAll('[data-fr]')];
   const originals = new Map(elements.map(el => [el, el.innerHTML]));
   const buttons = [...document.querySelectorAll('.language')];
-  const links = [...document.querySelectorAll('a[href="contact.html"],a[href="./"]')].map(link => ({link, base: link.getAttribute('href')}));
+  const links = [...document.querySelectorAll('a[href]')].filter(link => /^(?:[a-z0-9-]+\.html|\.\/)(?:[?#].*)?$/.test(link.getAttribute("href"))).map(link => ({link, base: link.getAttribute('href')}));
   const setLanguage = lang => {
     document.documentElement.lang = lang;
     elements.forEach(el => { if (lang === 'fr') el.textContent = el.dataset.fr; else el.innerHTML = originals.get(el); });
